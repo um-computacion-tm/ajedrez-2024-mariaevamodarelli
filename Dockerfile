@@ -9,5 +9,5 @@ RUN pip install -r requirements.txt
 
 CMD ["sh", "-c", "coverage run -m unittest && coverage report -m && python main.py"]
 
-# docker buildx build -t first-circleci-dqmdz-um .
-# docker run -i first-circleci-dqmdz-um
+# docker buildx build -t ajedrez .
+# docker run -i ajedrez
