@@ -13,7 +13,7 @@ class Chess:
         to_row,
         to_col,
     ):
-        # validate coords
+
         piece = self.__board__.get_piece(from_row, from_col)
         self.change_turn()
     @property
