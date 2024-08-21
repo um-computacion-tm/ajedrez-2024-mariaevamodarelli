@@ -6,6 +6,9 @@ class Chess:
         self.__board__ = Board()
         self.__turn__ = "WHITE"
 
+    def is_playing(self):
+        return True
+
     def move(
         self,
         from_row,
@@ -13,12 +16,15 @@ class Chess:
         to_row,
         to_col,
     ):
-
+        
         piece = self.__board__.get_piece(from_row, from_col)
         self.change_turn()
     @property
     def turn(self):
         return self.__turn__
+
+    def show_board(self):
+        return str(self.__board__)
 
     def change_turn(self):
         if self.__turn__ == "WHITE":
