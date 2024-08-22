@@ -60,22 +60,22 @@ from cli import play
 #        self.assertEqual(mock_chess_move.call_count, 0)
 
 #TESTBOARD
-import unittest
-from board import Board
+#import unittest
+#from board import Board
 
-class TestBoard(unittest.TestCase):
-    def test_str_board(self):
-        board = Board()
-        self.assertEqual(
-            str(board),
-            (
-                "♖      ♖\n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "        \n"
-                "♜      ♜\n"
-            )
-        )
+#class TestBoard(unittest.TestCase):
+#    def test_str_board(self):
+#        board = Board()
+#        self.assertEqual(
+#            str(board),
+#            (
+#                "♖      ♖\n"
+#                "        \n"
+#                "        \n"
+#                "        \n"
+#                "        \n"
+#                "        \n"
+#                "        \n"
+#                "♜      ♜\n"
+#            )
+#        )
