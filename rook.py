@@ -1,5 +1,4 @@
 from pieces import SymbolPiece
-from board import Board
 
 
 class Rook(SymbolPiece):

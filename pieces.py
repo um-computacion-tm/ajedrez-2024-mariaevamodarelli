@@ -4,7 +4,7 @@ class Piece:
         self.__row__ = row
         self.__column__ = col
 
-        
+
     def __repr__(self):
         return f"{self.__class__.__name__[0]}{self.color[0]}"
 
@@ -18,9 +18,9 @@ class Piece:
     def move(self, dest_row, dest_col, board):
         if self.is_valid_move(dest_row, dest_col, board):
             board[dest_row][dest_col] = self
-            board[self.row][self.col] = None
-            self.row = dest_row
-            self.col = dest_col
+            board[self.__row__][self.__column__] = None
+            self.__row__ = dest_row
+            self.__column__ = dest_col
         else:
             print(f"Invalid move for {self}")
 
