@@ -1,5 +1,6 @@
-from pieces import Piece
+from pieces import SymbolPiece
 
 
-class Rook(Piece):
-    ...
+class Rook(SymbolPiece):
+    def __init__(self, color, row, col):
+        super().__init__(color, row, col, "♜", "♖")
