@@ -1,9 +1,7 @@
-from pieces import Piece
+from pieces import SymbolPiece
+from board import Board
 
 
-class Knight(Piece):
-    def __str__(self):
-        if self.__color__ == "WHITE":
-            return "♞"
-        else:
-            return "♘"
+class Knight(SymbolPiece):
+    def __init__(self, color, row, col):
+        super().__init__(color, row, col, "♞", "♘")

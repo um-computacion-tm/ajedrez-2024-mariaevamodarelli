@@ -3,6 +3,8 @@ class Piece:
         self.__color__ = color
         self.__row__ = row
         self.__column__ = col
+
+        
     def __repr__(self):
         return f"{self.__class__.__name__[0]}{self.color[0]}"
 
@@ -21,3 +23,16 @@ class Piece:
             self.col = dest_col
         else:
             print(f"Invalid move for {self}")
+
+
+class SymbolPiece(Piece):
+    def __init__(self, color, row, col, white_symbol, black_symbol):
+        super().__init__(color, row, col)
+        self.white_symbol = white_symbol
+        self.black_symbol = black_symbol
+
+    def __str__(self):
+        if self.__color__ == "WHITE":
+            return self.white_symbol
+        else:
+            return self.black_symbol
