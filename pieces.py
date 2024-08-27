@@ -26,8 +26,10 @@ class Piece:
 
 
 class SymbolPiece(Piece):
-    def __init__(self, color, row, col, white_symbol, black_symbol):
-        super().__init__(color, row, col)
+    def __init__(self, white_symbol, black_symbol):
+
+    #def __init__(self, color, row, col, white_symbol, black_symbol):
+        #super().__init__(color, row, col)
         self.white_symbol = white_symbol
         self.black_symbol = black_symbol
 
