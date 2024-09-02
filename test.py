@@ -1,26 +1,76 @@
-
 import unittest
 from board import Board
+from pieces import SymbolPiece
 from rook import Rook
 from knight import Knight
 from bishop import Bishop
+from chess import Chess
 
+class TestSymbolPiece(unittest.TestCase):
+    def setUp(self):
+        
+        self.board = Board()
+        self.white_piece = Rook("WHITE", 0, 0)
+        self.black_piece = Rook("BLACK", 7, 7)
+        self.board.__positions__[0][0] = self.white_piece
+        self.board.__positions__[7][7] = self.black_piece
 
+    def test_initial_position(self):
+        
+        self.assertEqual(self.board.get_piece(0, 0), self.white_piece)
+        self.assertEqual(self.board.get_piece(7, 7), self.black_piece)
 
-class TestRook(unittest.TestCase):
+    def test_invalid_move(self):
+        
+        self.white_piece.move(8, 8, self.board.__positions__)
+    
+        self.assertEqual(self.board.get_piece(0, 0), self.white_piece)
+
+    def test_move(self):
+        
+        self.white_piece.move(1, 0, self.board.__positions__)
+        
+        self.assertEqual(self.board.get_piece(1, 0), self.white_piece)
+        self.assertEqual(self.board.get_piece(0, 0), None)
+
+    def test_repr(self):
+        
+        self.assertEqual(repr(self.white_piece), 'RW')
 
     def test_str(self):
-        board = Board()
-        rook = Rook ("WHITE")
-        self.assertEqual(str(rook), "♜")
+        
+        self.assertEqual(str(self.white_piece), '♖')
+        self.assertEqual(str(self.black_piece), '♜')
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#class TestRook(unittest.TestCase):
+
+#    def test_str(self):
+#        board = Board()
+#        rook = Rook ("WHITE")
+#        self.assertEqual(str(rook), "♜")
 
 #    def test_str(self):
 #        rook = Rook ("BLACK")
 #        self.assertEqual(str(rook), "♖")
-
-if __name__ == "__main__":
-     unittest.main()
-
 
 
 

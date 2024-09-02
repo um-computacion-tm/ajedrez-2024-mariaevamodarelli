@@ -1,12 +1,11 @@
-from pieces import Piece
+from pieces import SymbolPiece
 
-
-class Bishop(Piece):
-   white_str = "♝"
-   black_str = "♗"
+class Bishop(SymbolPiece):
+    def __init__(self, color, row, col):
+        super().__init__(color, row, col, '♗', '♝')
     
-
-
-#     def __init__(self, color, row, col):
-#        super().__init__(color, row, col, "♝", "♗")
-    
+    def get_moves(self, board):
+        # Implementación específica para Bishop
+        moves = []
+        # Lógica para los movimientos válidos del Bishop
+        return moves

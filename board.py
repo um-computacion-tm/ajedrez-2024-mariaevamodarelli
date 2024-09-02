@@ -2,8 +2,6 @@ from rook import Rook
 from knight import Knight
 from bishop import Bishop
 
-
-
 class Board:
     def __init__(self):
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
@@ -35,15 +33,3 @@ class Board:
 
     def get_piece(self, row, col):
         return self.__positions__[row][col]
-
-
-
-
-
-
-
-
-
-
-
-
