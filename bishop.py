@@ -5,7 +5,7 @@ class Bishop(SymbolPiece):
         super().__init__(color, row, col, '♗', '♝')
     
     def get_moves(self, board):
-        # Implementación específica para Bishop
+       
         moves = []
-        # Lógica para los movimientos válidos del Bishop
+       
         return moves

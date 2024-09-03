@@ -42,85 +42,48 @@ class TestSymbolPiece(unittest.TestCase):
         self.assertEqual(str(self.white_piece), '♖')
         self.assertEqual(str(self.black_piece), '♜')
 
+#test caballo 
+
+
+
+class TestKnight(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.white_knight = Knight("WHITE", 1, 0)
+        self.black_knight = Knight("BLACK", 6, 5)
+        self.board.__positions__[1][0] = self.white_knight
+        self.board.__positions__[6][5] = self.black_knight
+
+    def test_initial_position(self):
+        self.assertEqual(self.board.get_piece(1, 0), self.white_knight)
+        self.assertEqual(self.board.get_piece(6, 5), self.black_knight)
+
+    def test_invalid_move(self):
+        
+        self.white_knight.move(8, 8, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(1, 0), self.white_knight)
+
+    def test_valid_moves(self):
+        valid_moves = self.white_knight.get_moves(self.board.__positions__)
+        
+        expected_moves = [(3, 1), (2, 2)]  
+        self.assertTrue(set(expected_moves).issubset(set(valid_moves)))
+
+    def test_move(self):
+        
+        self.white_knight.move(3, 1, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(3, 1), self.white_knight)
+        self.assertEqual(self.board.get_piece(1, 0), None)
+
+    def test_repr(self):
+        self.assertEqual(repr(self.white_knight), 'KW')
+
+    def test_str(self):
+        self.assertEqual(str(self.white_knight), '♘')
+        self.assertEqual(str(self.black_knight), '♞')
+
+
+
+
 if __name__ == '__main__':
     unittest.main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#class TestRook(unittest.TestCase):
-
-#    def test_str(self):
-#        board = Board()
-#        rook = Rook ("WHITE")
-#        self.assertEqual(str(rook), "♜")
-
-#    def test_str(self):
-#        rook = Rook ("BLACK")
-#        self.assertEqual(str(rook), "♖")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#class TestBoard(unittest.TestCase):
-
-
-#    def test_initial_board_state(self):
-        
-#        expected_str = (
-#            "♜♞♝  ♝♞♜\n"
-#            "        \n"
-#            "        \n"
-#            "        \n"
-#            "        \n"
-#            "        \n"
-#            "        \n"
-#            "♖♘♗  ♗♘♖\n"
-#        )
-#        self.assertEqual(str(self.board), expected_str)
-
-#    def test_get_piece(self):
-#        
-#        self.assertIsInstance(self.board.get_piece(0, 0), Rook)
-#        self.assertIsInstance(self.board.get_piece(0, 1), Knight)
-#        self.assertIsInstance(self.board.get_piece(0, 2), Bishop)
-#        self.assertIsInstance(self.board.get_piece(0, 6), Knight)
-#        self.assertIsInstance(self.board.get_piece(0, 5), Bishop)
-#        self.assertIsInstance(self.board.get_piece(0, 7), Rook)
-        
-#        self.assertIsInstance(self.board.get_piece(7, 0), Rook)
-#        self.assertIsInstance(self.board.get_piece(7, 1), Knight)
-#        self.assertIsInstance(self.board.get_piece(7, 2), Bishop)
-#        self.assertIsInstance(self.board.get_piece(7, 6), Knight)
-#        self.assertIsInstance(self.board.get_piece(7, 5), Bishop)
-#        self.assertIsInstance(self.board.get_piece(7, 7), Rook)
-#        
-#        self.assertIsNone(self.board.get_piece(4, 4))  # Asumiendo una celda vacía
-
-#    def test_empty_cell(self):
-       
-#        self.assertIsNone(self.board.get_piece(4, 4))

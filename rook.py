@@ -7,7 +7,7 @@ class Rook(SymbolPiece):
     def get_moves(self, board):
         moves = []
         row, col = self.__row__, self.__column__
-        # Moves horizontally
+        
         for c in range(col + 1, 8):
             if board[row][c] is None:
                 moves.append((row, c))
