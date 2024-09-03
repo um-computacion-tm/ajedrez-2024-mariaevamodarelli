@@ -1,6 +1,6 @@
-from pieces import Piece
+from pieces import SymbolPiece
 
 
-class Queen(Piece):
+class Queen(SymbolPiece):
     ...
     
