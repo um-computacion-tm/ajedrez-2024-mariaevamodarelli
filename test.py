@@ -5,7 +5,10 @@ from rook import Rook
 from knight import Knight
 from bishop import Bishop
 from chess import Chess
+from queen import Queen
+from king import King
 
+    #test torre
 class TestSymbolPiece(unittest.TestCase):
     def setUp(self):
         
@@ -42,9 +45,8 @@ class TestSymbolPiece(unittest.TestCase):
         self.assertEqual(str(self.white_piece), '♖')
         self.assertEqual(str(self.black_piece), '♜')
 
+
 #test caballo 
-
-
 
 class TestKnight(unittest.TestCase):
     def setUp(self):
@@ -82,6 +84,71 @@ class TestKnight(unittest.TestCase):
         self.assertEqual(str(self.white_knight), '♘')
         self.assertEqual(str(self.black_knight), '♞')
 
+    #test reina
+
+class TestQueen(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.white_queen = Queen("WHITE", 0, 3)
+        self.black_queen = Queen("BLACK", 7, 3)
+        self.board.__positions__[0][3] = self.white_queen
+        self.board.__positions__[7][3] = self.black_queen
+
+    def test_initial_position(self):
+        self.assertEqual(self.board.get_piece(0, 3), self.white_queen)
+        self.assertEqual(self.board.get_piece(7, 3), self.black_queen)
+
+    def test_invalid_move(self):
+        self.white_queen.move(8, 3, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(0, 3), self.white_queen)
+
+
+    def test_repr(self):
+        self.assertEqual(repr(self.white_queen), 'QW')
+
+    def test_str(self):
+        self.assertEqual(str(self.white_queen), '♕')
+        self.assertEqual(str(self.black_queen), '♛')
+
+
+
+
+    #test rey 
+
+class TestKing(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.white_king = King("WHITE", 0, 4)
+        self.black_king = King("BLACK", 7, 4)
+        self.board.__positions__[0][4] = self.white_king
+        self.board.__positions__[7][4] = self.black_king
+
+    def test_initial_position(self):
+        self.assertEqual(self.board.get_piece(0, 4), self.white_king)
+        self.assertEqual(self.board.get_piece(7, 4), self.black_king)
+
+    def test_invalid_move(self):
+        self.white_king.move(8, 4, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(0, 4), self.white_king)
+
+    def test_valid_moves(self):
+        valid_moves = self.white_king.get_moves(self.board.__positions__)
+        expected_moves = [
+            (0, 3), (0, 5), (1, 3), (1, 4), (1, 5)
+        ]
+        self.assertTrue(set(expected_moves).issubset(set(valid_moves)))
+
+    def test_move(self):
+        self.white_king.move(1, 4, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(1, 4), self.white_king)
+        self.assertEqual(self.board.get_piece(0, 4), None)
+
+    def test_repr(self):
+        self.assertEqual(repr(self.white_king), 'KW')
+
+    def test_str(self):
+        self.assertEqual(str(self.white_king), '♔')
+        self.assertEqual(str(self.black_king), '♚')
 
 
 
