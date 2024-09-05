@@ -150,6 +150,34 @@ class TestKing(unittest.TestCase):
         self.assertEqual(str(self.white_king), '♔')
         self.assertEqual(str(self.black_king), '♚')
 
+#test alfil
+
+class TestBishop(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.white_bishop = Bishop("WHITE", 4, 4)
+        self.board.__positions__[4][4] = self.white_bishop
+
+    def test_initial_position(self):
+        self.assertEqual(self.board.get_piece(4, 4), self.white_bishop)
+
+    def test_invalid_move(self):
+        # Intenta mover a una posición fuera de las posibles y verifica que no se mueva
+        self.white_bishop.move(7, 7, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(4, 4), self.white_bishop)
+
+
+    def test_move(self):
+        self.white_bishop.move(5, 5, self.board.__positions__)
+        self.assertEqual(self.board.get_piece(5, 5), self.white_bishop)
+        self.assertEqual(self.board.get_piece(4, 4), None)
+
+    def test_repr(self):
+        self.assertEqual(repr(self.white_bishop), 'BW')
+
+    def test_str(self):
+        self.assertEqual(str(self.white_bishop), '♗')
+
 
 
 if __name__ == '__main__':
