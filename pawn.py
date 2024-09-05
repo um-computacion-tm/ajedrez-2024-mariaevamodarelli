@@ -1,5 +1,5 @@
-from pieces import Piece
+from pieces import SymbolPiece
 
 
-class Pawn(Piece):
+class Pawn(SymbolPiece):
     ...
