@@ -7,10 +7,10 @@ class Bishop(SymbolPiece):
     def get_moves(self, board):
         moves = []
         directions = [
-            (1, 1),  # Diagonal hacia abajo a la derecha
-            (-1, -1),  # Diagonal hacia arriba a la izquierda
-            (1, -1),  # Diagonal hacia abajo a la izquierda
-            (-1, 1)  # Diagonal hacia arriba a la derecha
+            (1, 1),  
+            (-1, -1),  
+            (1, -1),  
+            (-1, 1)  
         ]
 
         for dr, dc in directions:
@@ -24,11 +24,11 @@ class Bishop(SymbolPiece):
                         moves.append((r, c))
                     elif destination.__color__ != self.__color__:
                         moves.append((r, c))
-                        break  # La pieza en la posición es adversaria, puede ser capturada
+                        break  
                     else:
-                        break  # La pieza en la posición es del mismo color, bloquea el movimiento
+                        break  
                 else:
-                    break  # El movimiento está fuera del tablero
+                    break  
 
         return moves
 

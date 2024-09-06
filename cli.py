@@ -15,7 +15,7 @@ def play(chess):
         to_row = int(input("To row (0-7): "))
         to_col = int(input("To col (0-7): "))
 
-        # Ensure input is within board limits
+        
         if not (0 <= from_row < 8 and 0 <= from_col < 8 and 0 <= to_row < 8 and 0 <= to_col < 8):
             print("Error: Row and column must be between 0 and 7.")
             return

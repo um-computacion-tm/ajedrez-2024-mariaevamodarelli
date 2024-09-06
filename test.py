@@ -7,6 +7,7 @@ from bishop import Bishop
 from chess import Chess
 from queen import Queen
 from king import King
+from pawn import Pawn
 
     #test torre
 class TestSymbolPiece(unittest.TestCase):
@@ -162,7 +163,7 @@ class TestBishop(unittest.TestCase):
         self.assertEqual(self.board.get_piece(4, 4), self.white_bishop)
 
     def test_invalid_move(self):
-        # Intenta mover a una posición fuera de las posibles y verifica que no se mueva
+        
         self.white_bishop.move(7, 7, self.board.__positions__)
         self.assertEqual(self.board.get_piece(4, 4), self.white_bishop)
 
@@ -177,6 +178,63 @@ class TestBishop(unittest.TestCase):
 
     def test_str(self):
         self.assertEqual(str(self.white_bishop), '♗')
+
+
+#test peon 
+ 
+
+class TestPawn(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        
+        self.white_pawn = Pawn("WHITE", 6, 4)
+        self.black_pawn = Pawn("BLACK", 1, 4)
+        
+        self.board.__positions__[6][4] = self.white_pawn
+        self.board.__positions__[1][4] = self.black_pawn
+
+    def test_initial_position(self):
+        
+        self.assertEqual(self.board.get_piece(6, 4), self.white_pawn)
+        self.assertEqual(self.board.get_piece(1, 4), self.black_pawn)
+
+    def test_invalid_move(self):
+        
+        self.white_pawn.move(8, 4, self.board.__positions__)
+        
+        self.assertEqual(self.board.get_piece(6, 4), self.white_pawn)
+
+    def test_valid_moves_white(self):
+        
+        valid_moves = self.white_pawn.get_moves(self.board.__positions__)
+        expected_moves = [(5, 4), (4, 4)]  
+        self.assertTrue(set(expected_moves).issubset(set(valid_moves)))
+
+    def test_valid_moves_black(self):
+        
+        valid_moves = self.black_pawn.get_moves(self.board.__positions__)
+        expected_moves = [(2, 4), (3, 4)]  
+        self.assertTrue(set(expected_moves).issubset(set(valid_moves)))
+
+    def test_move(self):
+        
+        self.white_pawn.move(5, 4, self.board.__positions__)
+        
+        self.assertEqual(self.board.get_piece(5, 4), self.white_pawn)
+        self.assertEqual(self.board.get_piece(6, 4), None)
+
+    def test_repr(self):
+        
+        self.assertEqual(repr(self.white_pawn), 'PW')
+        self.assertEqual(repr(self.black_pawn), 'PB')
+
+    def test_str(self):
+        
+        self.assertEqual(str(self.white_pawn), '♙')
+        self.assertEqual(str(self.black_pawn), '♟')
+
+
+
 
 
 

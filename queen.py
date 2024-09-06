@@ -7,8 +7,8 @@ class Queen(SymbolPiece):
     def get_moves(self, board):
         moves = []
         directions = [
-            (1, 0), (-1, 0), (0, 1), (0, -1),  # Vertical y horizontal
-            (1, 1), (-1, -1), (1, -1), (-1, 1)  # Diagonales
+            (1, 0), (-1, 0), (0, 1), (0, -1),  
+            (1, 1), (-1, -1), (1, -1), (-1, 1)  
         ]
         for dr, dc in directions:
             r, c = self.__row__, self.__column__

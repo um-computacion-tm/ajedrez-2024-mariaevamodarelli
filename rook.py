@@ -24,7 +24,7 @@ class Rook(SymbolPiece):
                     moves.append((row, c))
                 break
         
-        # Moves vertically
+        
         for r in range(row + 1, 8):
             if board[r][col] is None:
                 moves.append((r, col))
