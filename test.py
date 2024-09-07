@@ -233,6 +233,31 @@ class TestPawn(unittest.TestCase):
         self.assertEqual(str(self.white_pawn), '♙')
         self.assertEqual(str(self.black_pawn), '♟')
 
+#testjaquemate
+import unittest
+from board import Board
+from king import King
+from rook import Rook
+
+class TestCheckAndCheckmate(unittest.TestCase):
+    def setUp(self):
+        self.board = Board()
+        self.white_king = King("WHITE", 0, 4)
+        self.black_king = King("BLACK", 7, 4)
+        self.white_rook = Rook("WHITE", 1, 4)
+        self.black_rook = Rook("BLACK", 6, 4)
+        self.board.__positions__[0][4] = self.white_king
+        self.board.__positions__[7][4] = self.black_king
+        self.board.__positions__[1][4] = self.white_rook
+        self.board.__positions__[6][4] = self.black_rook
+
+    def test_is_check(self):
+        # Mueve la torre negra para poner al rey blanco en jaque
+        self.board.__positions__[1][4] = None
+        self.board.__positions__[5][4] = self.black_rook
+        self.assertTrue(self.board.is_check("WHITE"))
+
+
 
 
 

@@ -8,7 +8,7 @@ class Piece:
         return f"{self.__class__.__name__[0]}{self.__color__[0]}"
 
     def get_moves(self, board):
-        raise NotImplementedError
+        raise NotImplementedError("Este método debe ser implementado en las subclases.")
 
     def is_valid_move(self, dest_row, dest_col, board):
         moves = self.get_moves(board)
@@ -29,6 +29,9 @@ class Piece:
     def get_column(self):
         return self.__column__
 
+    def get_color(self):
+        return self.__color__
+
 
 class SymbolPiece(Piece):
     def __init__(self, color, row, col, white_symbol, black_symbol):
@@ -37,4 +40,4 @@ class SymbolPiece(Piece):
         self.black_symbol = black_symbol
 
     def __str__(self):
-        return self.white_symbol if self.__color__ == "WHITE" else self.black_symbol
+        return self.white_symbol if self.get_color() == "WHITE" else self.black_symbol
