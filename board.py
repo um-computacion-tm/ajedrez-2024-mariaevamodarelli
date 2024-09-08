@@ -6,8 +6,12 @@ from queen import Queen
 from pawn import Pawn
 
 class Board:
+
+    
+    
     def __init__(self):
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
+        self.turn = "WHITE"
         self.setup_pieces()
 
     def setup_pieces(self):
@@ -38,6 +42,14 @@ class Board:
         # Posicionando peones blancos
         for col in range(8):
             self.__positions__[6][col] = Pawn("WHITE", 6, col)
+
+    def get_turn(self):
+        
+        return self.turn
+
+    def switch_turn(self):
+        
+        self.turn = "BLACK" if self.turn == "WHITE" else "WHITE"
 
     def __str__(self):
         board_str = ""
@@ -98,3 +110,5 @@ class Board:
         self.__positions__[piece.get_row()][piece.get_column()] = None
         self.__positions__[row][col] = piece
         piece.move(row, col, self.__positions__)
+
+

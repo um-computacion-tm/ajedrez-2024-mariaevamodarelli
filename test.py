@@ -252,16 +252,35 @@ class TestCheckAndCheckmate(unittest.TestCase):
         self.board.__positions__[6][4] = self.black_rook
 
     def test_is_check(self):
-        # Mueve la torre negra para poner al rey blanco en jaque
         self.board.__positions__[1][4] = None
         self.board.__positions__[5][4] = self.black_rook
         self.assertTrue(self.board.is_check("WHITE"))
 
 
+#test turnos
 
 
+class TestTurnControl(unittest.TestCase):
 
+    def setUp(self):
+        self.board = Board()
 
+    def test_initial_turn(self):
+        
+        self.assertEqual(self.board.get_turn(), "WHITE")
+
+    def test_switch_turn(self):
+        
+        self.board.switch_turn()
+        self.assertEqual(self.board.get_turn(), "BLACK")
+
+        
+        self.board.switch_turn()
+        self.assertEqual(self.board.get_turn(), "WHITE")
 
 if __name__ == '__main__':
     unittest.main()
+
+
+
+
