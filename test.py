@@ -257,11 +257,12 @@ class TestCheckAndCheckmate(unittest.TestCase):
         self.assertTrue(self.board.is_check("WHITE"))
 
 
-#test turnos
+
+#test comer fichas y turnos 
+
 
 
 class TestTurnControl(unittest.TestCase):
-
     def setUp(self):
         self.board = Board()
 
@@ -271,12 +272,52 @@ class TestTurnControl(unittest.TestCase):
 
     def test_switch_turn(self):
         
-        self.board.switch_turn()
+        white_pawn = self.board.get_piece(6, 0)  
+        self.board.move_piece(white_pawn, 4, 0)  
         self.assertEqual(self.board.get_turn(), "BLACK")
 
-        
-        self.board.switch_turn()
+        black_pawn = self.board.get_piece(1, 0)  
+        self.board.move_piece(black_pawn, 3, 0)  
         self.assertEqual(self.board.get_turn(), "WHITE")
+
+    def test_move_wrong_turn(self):
+        
+        white_pawn = self.board.get_piece(6, 0)
+        black_pawn = self.board.get_piece(1, 0)
+        
+        with self.assertRaises(ValueError):
+            self.board.move_piece(black_pawn, 3, 0)  
+
+    def test_capture_enemy_piece(self):
+        
+        white_pawn = self.board.get_piece(6, 0)
+        black_pawn = self.board.get_piece(1, 1)
+
+        
+        self.board.move_piece(white_pawn, 4, 0)
+        self.assertEqual(self.board.get_turn(), "BLACK")
+        
+        
+        self.board.move_piece(black_pawn, 3, 1)
+        self.assertEqual(self.board.get_turn(), "WHITE")
+
+        
+        self.board.move_piece(white_pawn, 3, 1)
+        self.assertIsNone(self.board.get_piece(3, 0))  
+        self.assertEqual(self.board.get_piece(3, 1), white_pawn)  
+        self.assertEqual(self.board.get_turn(), "BLACK")
+
+    def test_invalid_capture_own_piece(self):
+        
+        white_rook = self.board.get_piece(7, 0)  
+        white_pawn = self.board.get_piece(6, 0)  
+
+        with self.assertRaises(ValueError):
+            self.board.move_piece(white_rook, 6, 0)  
+
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -105,10 +105,29 @@ class Board:
                         self.move_piece(piece, piece.get_row(), piece.get_column())
                         self.__positions__[move[0]][move[1]] = target_piece
         return True
-
+    
     def move_piece(self, piece, row, col):
+        # Verifica si es el turno correcto antes de mover
+        if piece.get_color() != self.get_turn():
+            raise ValueError("No es el turno de este jugador.")
+
+        # Obtén la pieza que está en la posición destino
+        target_piece = self.get_piece(row, col)
+
+        # Verifica si hay una pieza del oponente en la posición de destino
+        if target_piece and target_piece.get_color() == piece.get_color():
+            raise ValueError("No puedes capturar tus propias piezas.")
+
+        # Captura la pieza enemiga si está presente
+        if target_piece and target_piece.get_color() != piece.get_color():
+            self.__positions__[row][col] = None  # Remueve la pieza capturada
+
+        # Mueve la pieza a la nueva posición
         self.__positions__[piece.get_row()][piece.get_column()] = None
         self.__positions__[row][col] = piece
         piece.move(row, col, self.__positions__)
+
+        # Cambia el turno después del movimiento
+        self.switch_turn()
 
 
