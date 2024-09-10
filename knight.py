@@ -1,4 +1,3 @@
-                                                                                                            # knight.py
 from pieces import SymbolPiece
 
 class Knight(SymbolPiece):

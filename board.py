@@ -15,7 +15,7 @@ class Board:
         self.setup_pieces()
 
     def setup_pieces(self):
-        # Posicionando piezas negras
+        
         self.__positions__[0][0] = Rook("BLACK", 0, 0)
         self.__positions__[0][7] = Rook("BLACK", 0, 7)
         self.__positions__[0][1] = Knight("BLACK", 0, 1)
@@ -25,11 +25,11 @@ class Board:
         self.__positions__[0][3] = Queen("BLACK", 0, 3)
         self.__positions__[0][4] = King("BLACK", 0, 4)
 
-        # Posicionando peones negros
+        
         for col in range(8):
             self.__positions__[1][col] = Pawn("BLACK", 1, col)
 
-        # Posicionando piezas blancas
+        
         self.__positions__[7][7] = Rook("WHITE", 7, 7)
         self.__positions__[7][0] = Rook("WHITE", 7, 0)
         self.__positions__[7][1] = Knight("WHITE", 7, 1)
@@ -39,7 +39,7 @@ class Board:
         self.__positions__[7][3] = Queen("WHITE", 7, 3)
         self.__positions__[7][4] = King("WHITE", 7, 4)
 
-        # Posicionando peones blancos
+        
         for col in range(8):
             self.__positions__[6][col] = Pawn("WHITE", 6, col)
 
@@ -107,27 +107,27 @@ class Board:
         return True
     
     def move_piece(self, piece, row, col):
-        # Verifica si es el turno correcto antes de mover
+        
         if piece.get_color() != self.get_turn():
             raise ValueError("No es el turno de este jugador.")
 
-        # Obtén la pieza que está en la posición destino
+        
         target_piece = self.get_piece(row, col)
 
-        # Verifica si hay una pieza del oponente en la posición de destino
+        
         if target_piece and target_piece.get_color() == piece.get_color():
             raise ValueError("No puedes capturar tus propias piezas.")
 
-        # Captura la pieza enemiga si está presente
+        
         if target_piece and target_piece.get_color() != piece.get_color():
-            self.__positions__[row][col] = None  # Remueve la pieza capturada
+            self.__positions__[row][col] = None  
 
-        # Mueve la pieza a la nueva posición
+        
         self.__positions__[piece.get_row()][piece.get_column()] = None
         self.__positions__[row][col] = piece
         piece.move(row, col, self.__positions__)
 
-        # Cambia el turno después del movimiento
+        
         self.switch_turn()
 
 

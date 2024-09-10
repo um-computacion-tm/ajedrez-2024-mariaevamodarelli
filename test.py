@@ -234,10 +234,7 @@ class TestPawn(unittest.TestCase):
         self.assertEqual(str(self.black_pawn), '♟')
 
 #testjaquemate
-import unittest
-from board import Board
-from king import King
-from rook import Rook
+
 
 class TestCheckAndCheckmate(unittest.TestCase):
     def setUp(self):
