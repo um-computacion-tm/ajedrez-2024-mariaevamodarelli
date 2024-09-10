@@ -1,5 +1,6 @@
 13/08: creando todos los archivos y empezando con el archivo board.py poniendo la torre, y haciendo el chess.py y cli.py
-14/08: agregando las diferentes piezas a sus archivos
+14/08: creando los archivos para las diferentes piezas a sus archivos
+15/08: agregando las piezas a la clase padre
 16/08: agregando movimientos a la clase padre
 20/08: agregando los test de los movimientos
 21/08: agregando las posiciones de las piezas al archivo board.py y sus tests
