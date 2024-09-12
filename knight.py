@@ -1,31 +1,26 @@
 from pieces import SymbolPiece
 
+
 class Knight(SymbolPiece):
-    def __init__(self, color, row, col):
-        super().__init__(color, row, col, '♘', '♞')
+    def __init__(self, color, x, y, white_symbol='♘', black_symbol='♞'):
+        super().__init__(color, x, y, white_symbol, black_symbol)
 
     def get_moves(self, board):
         moves = []
-        directions = [
-            (2, 1), (2, -1), (-2, 1), (-2, -1),
-            (1, 2), (1, -2), (-1, 2), (-1, -2)
+        potential_moves = [
+            (self.__row__ + 2, self.__column__ + 1), 
+            (self.__row__ + 2, self.__column__ - 1),
+            (self.__row__ - 2, self.__column__ + 1), 
+            (self.__row__ - 2, self.__column__ - 1),
+            (self.__row__ + 1, self.__column__ + 2), 
+            (self.__row__ + 1, self.__column__ - 2),
+            (self.__row__ - 1, self.__column__ + 2), 
+            (self.__row__ - 1, self.__column__ - 2)
         ]
-        for dr, dc in directions:
-            new_row = self.__row__ + dr
-            new_col = self.__column__ + dc
-            if 0 <= new_row < 8 and 0 <= new_col < 8:
-                destination = board[new_row][new_col]
-                if destination is None or destination.__color__ != self.__color__:
-                    moves.append((new_row, new_col))
+        for r, c in potential_moves:
+            if self.is_valid_position(r, c) and (board[r][c] is None or board[r][c].__color__ != self.__color__):
+                moves.append((r, c))
         return moves
 
-    def move(self, dest_row, dest_col, board):
-        if (dest_row, dest_col) in self.get_moves(board):
-            
-            board[dest_row][dest_col] = self
-            board[self.__row__][self.__column__] = None
-            
-            self.__row__ = dest_row
-            self.__column__ = dest_col
-        else:
-            print(f"Invalid move for {self}")
+    def is_valid_position(self, row, col):
+        return 0 <= row < 8 and 0 <= col < 8

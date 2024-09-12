@@ -1,44 +1,33 @@
 from pieces import SymbolPiece
 
+
 class Rook(SymbolPiece):
-    def __init__(self, color, row, col):
-        super().__init__(color, row, col, '♖', '♜')
-    
+    def __init__(self, color, x, y, white_symbol='♖', black_symbol='♜'):
+        super().__init__(color, x, y, white_symbol, black_symbol)
+
+
     def get_moves(self, board):
         moves = []
         row, col = self.__row__, self.__column__
+
         
-        for c in range(col + 1, 8):
-            if board[row][c] is None:
-                moves.append((row, c))
-            else:
-                if board[row][c].__color__ != self.__color__:
-                    moves.append((row, c))
-                break
+        def add_moves_in_direction(dr, dc):
+            r, c = row + dr, col + dc
+            while 0 <= r < 8 and 0 <= c < 8:
+                if board[r][c] is None:
+                    moves.append((r, c))
+                elif board[r][c].__color__ != self.__color__:
+                    moves.append((r, c))
+                    break
+                else:
+                    break
+                r += dr
+                c += dc
+
         
-        for c in range(col - 1, -1, -1):
-            if board[row][c] is None:
-                moves.append((row, c))
-            else:
-                if board[row][c].__color__ != self.__color__:
-                    moves.append((row, c))
-                break
-        
-        
-        for r in range(row + 1, 8):
-            if board[r][col] is None:
-                moves.append((r, col))
-            else:
-                if board[r][col].__color__ != self.__color__:
-                    moves.append((r, col))
-                break
-        
-        for r in range(row - 1, -1, -1):
-            if board[r][col] is None:
-                moves.append((r, col))
-            else:
-                if board[r][col].__color__ != self.__color__:
-                    moves.append((r, col))
-                break
-        
+        add_moves_in_direction(-1, 0)  
+        add_moves_in_direction(1, 0)   
+        add_moves_in_direction(0, -1)  
+        add_moves_in_direction(0, 1)   
+
         return moves

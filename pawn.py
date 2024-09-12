@@ -1,9 +1,9 @@
 from pieces import SymbolPiece
 
+
 class Pawn(SymbolPiece):
-    def __init__(self, color, row, col):
-        super().__init__(color, row, col, '♙', '♟')
-        self.__initial_row__ = row  
+    def __init__(self, color, x, y, white_symbol='♙', black_symbol='♟'):
+        super().__init__(color, x, y, white_symbol, black_symbol)
 
     def get_moves(self, board):
         moves = []
