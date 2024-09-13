@@ -16,3 +16,4 @@
 09/09: mejorando la interaccion con el usuario para que cuando juegue y cometa un error este codigo le devuelva especificamente el error 
 10/09: cambiando el codigo para mejorarlo
 11/09: haciendo el codigo mas simple
+12/09: refactorizando mi archivo board.py
