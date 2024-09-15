@@ -17,3 +17,4 @@
 10/09: cambiando el codigo para mejorarlo
 11/09: haciendo el codigo mas simple
 12/09: refactorizando mi archivo board.py
+14/09: agregando test de board
