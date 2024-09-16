@@ -83,5 +83,53 @@ class TestBoard(unittest.TestCase):
         self.assertIsNone(self.board.get_piece(3, 4))  
         self.assertEqual(self.board.get_piece(3, 3), self.white_pawn)  
 
+
+
+class TestQueen(unittest.TestCase):
+    
+    def setUp(self):
+        """Configura un tablero con una reina y otras piezas para realizar las pruebas."""
+        self.board = Board()
+        self.white_queen = Queen('white', 3, 3)  
+        self.black_rook = Rook(3, 6, 'black')  
+        self.white_pawn = Pawn(6, 3, 'white')  
+        self.black_king = King(0, 0, 'black')  
+        
+
+        self.board.place_piece(self.white_queen)
+        self.board.place_piece(self.black_rook)
+        self.board.place_piece(self.white_pawn)
+        self.board.place_piece(self.black_king)
+    
+    def test_get_moves_no_obstacles(self):
+        """Prueba los movimientos de la reina cuando no hay obstáculos alrededor."""
+        self.board.clear_board()
+        self.board.place_piece(self.white_queen)  
+        expected_moves = [
+            
+            (2, 2), (1, 1), (0, 0), (4, 4), (5, 5), (6, 6), (7, 7),
+            (4, 2), (5, 1), (6, 0), (2, 4), (1, 5), (0, 6),
+            
+            (2, 3), (1, 3), (0, 3), (4, 3), (5, 3), (6, 3), (7, 3),
+            (3, 2), (3, 1), (3, 0), (3, 4), (3, 5), (3, 6), (3, 7)
+        ]
+        moves = self.white_queen.get_moves(self.board)
+        self.assertCountEqual(moves, expected_moves)
+
+    def test_get_moves_with_obstacles(self):
+        """Prueba los movimientos de la reina cuando hay obstáculos (piezas propias y enemigas)."""
+        expected_moves = [
+            
+            (2, 3), (1, 3), (0, 3), (4, 3), (5, 3),
+            (3, 2), (3, 1), (3, 0), (3, 4), (3, 5),
+            
+            (2, 2), (1, 1), (0, 0), (4, 4), (5, 5),
+            (4, 2), (5, 1), (6, 0),
+            
+            (3, 6)
+        ]
+        moves = self.white_queen.get_moves
+
+
 if __name__ == '__main__':
     unittest.main()

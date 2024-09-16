@@ -18,3 +18,4 @@
 11/09: haciendo el codigo mas simple
 12/09: refactorizando mi archivo board.py
 14/09: agregando test de board
+15/09: agregado test de queen
