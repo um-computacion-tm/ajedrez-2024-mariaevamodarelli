@@ -1,11 +1,9 @@
 import unittest
+from board import Board
+from pieces import SymbolPiece, Piece 
+from king import King
+from rook import Rook
+from queen import Queen
+from knight import Knight
+from pawn import Pawn
 
-from main import suma
-
-class TestSuma(unittest.TestCase):
-
-    def test_suma(self):
-        self.assertEqual(suma(1, 2), 3)
-
-if __name__ == '__main__':
-    unittest.main()
