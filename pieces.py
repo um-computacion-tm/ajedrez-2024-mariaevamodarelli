@@ -32,7 +32,7 @@ class Piece:
     def get_color(self):
         return self.__color__
 
-   
+    
     def add_moves_in_direction(board, row, col, direction, moves, color):
         d_row, d_col = direction
         r, c = row + d_row, col + d_col
@@ -45,6 +45,16 @@ class Piece:
                 break
             r += d_row
             c += d_col
+
+   
+    def add_potential_moves(board, moves, potential_moves, color):
+        for r, c in potential_moves:
+            if Piece.is_valid_position(r, c) and (board[r][c] is None or board[r][c].get_color() != color):
+                moves.append((r, c))
+
+   
+    def is_valid_position(row, col):
+        return 0 <= row < 8 and 0 <= col < 8
 
 
 class SymbolPiece(Piece):
