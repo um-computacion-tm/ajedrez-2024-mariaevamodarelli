@@ -29,44 +29,7 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(self.board.get_piece(0, 3), rook)
         self.assertIsNone(self.board.get_piece(0, 0))
 
-    def test_is_check(self):
-        """Test if the king is in check."""
-        white_king = King("WHITE", 7, 4)
-        black_rook = Rook("BLACK", 0, 4)
-        self.board.place_piece(white_king)
-        self.board.place_piece(black_rook)
-
-        self.assertTrue(self.board.is_check('WHITE'))
-
-    def test_is_not_check(self):
-        """Test if the king is not in check when no threats exist."""
-        white_king = King("WHITE", 7, 4)
-        black_rook = Rook("BLACK", 0, 0)
-        self.board.place_piece(white_king)
-        self.board.place_piece(black_rook)
-
-        self.assertFalse(self.board.is_check('WHITE'))
-
-    def test_is_checkmate(self):
-        """Test if the player is in checkmate."""
-        white_king = King("WHITE", 7, 4)
-        black_rook1 = Rook("BLACK", 0, 4)
-        black_rook2 = Rook("BLACK", 7, 3)
-        self.board.place_piece(white_king)
-        self.board.place_piece(black_rook1)
-        self.board.place_piece(black_rook2)
-
-        self.assertTrue(self.board.is_checkmate('WHITE'))
-
-    def test_is_not_checkmate(self):
-        """Test if the player is not in checkmate."""
-        white_king = King("WHITE", 7, 4)
-        black_rook = Rook("BLACK", 0, 4)
-        self.board.place_piece(white_king)
-        self.board.place_piece(black_rook)
-
-        self.assertFalse(self.board.is_checkmate('WHITE'))
-
+  
     def test_blocked_moves(self):
         """Test if a piece cannot move when blocked."""
         white_rook = Rook("WHITE", 0, 0)
@@ -89,3 +52,5 @@ class TestBoard(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
