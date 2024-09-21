@@ -23,3 +23,4 @@
 17/09: refactorizando el codigo
 18/09: agregando test de board
 19/09: modificando los test
+20/09: arregalndo los test
