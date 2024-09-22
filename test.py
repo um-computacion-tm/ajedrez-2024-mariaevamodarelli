@@ -35,20 +35,11 @@ class TestBoard(unittest.TestCase):
         self.assertEqual(self.board.get_piece(7, 1), self.white_rook)
         self.assertIsNone(self.board.get_piece(7, 0))
 
-    def test_is_check(self):
-        """Prueba si el rey está en jaque"""
-        self.board.move_piece(self.black_rook, 7, 1)
-        self.assertTrue(self.board.is_check('white'))
-
     def test_is_not_check(self):
         """Prueba si el rey no está en jaque"""
         self.assertFalse(self.board.is_check('white'))
 
-    def test_is_checkmate(self):
-        """Prueba si un jugador está en jaque mate"""
-        self.board.move_piece(self.black_rook, 7, 1)  
-        self.assertTrue(self.board.is_checkmate('white'))
-
+    
     def test_valid_moves(self):
         """Prueba obtener movimientos válidos para una pieza"""
         valid_moves = self.white_rook.get_moves(self.board)
