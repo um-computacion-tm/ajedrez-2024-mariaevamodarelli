@@ -1,0 +1,28 @@
+13/08: creando todos los archivos y empezando con el archivo board.py poniendo la torre, y haciendo el chess.py y cli.py
+14/08: creando los archivos para las diferentes piezas a sus archivos
+15/08: agregando las piezas a la clase padre
+16/08: agregando movimientos a la clase padre
+20/08: agregando los test de los movimientos
+21/08: agregando las posiciones de las piezas al archivo board.py y sus tests
+22/08: agregando test para pieces.py
+23/08: corrigiendo las piezas con su clase padre
+02/09: agregando los movimientos de knight.py y sus test
+03/09: agregando los movimientos de king.py y queen.py y sus test
+04/09: agregando los movimientos del bishop.py y sus test
+05/09: agregando la clase y los movimientos de pawn.py y sus test 
+06/09: agregando la implementacion del jaque y jaque mate y sus test
+07/09: agregando la implementacion de los turnos y sus test
+08/09: agregando para comer fichas y sus test
+09/09: mejorando la interaccion con el usuario para que cuando juegue y cometa un error este codigo le devuelva especificamente el error 
+10/09: cambiando el codigo para mejorarlo
+11/09: haciendo el codigo mas simple
+12/09: refactorizando mi archivo board.py
+14/09: agregando test de board
+15/09: agregado test de queen
+16/09: refactorizando los codigos de las piezas
+17/09: refactorizando el codigo
+18/09: agregando test de board
+19/09: modificando los test
+20/09: arregalndo los test
+21/09: modificando los test
+22/09: arregalndolos test
