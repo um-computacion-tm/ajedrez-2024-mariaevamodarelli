@@ -11,6 +11,11 @@ class Board:
         self.__positions__ = [[None for _ in range(8)] for _ in range(8)]
         self.__pieces__ = []
 
+    def place_piece(self, piece, row, col):
+        """Coloca una pieza en una posición específica del tablero."""
+        piece.move(row, col, self.board)  
+        self.board[row][col] = piece  
+
     def add_piece(self, piece):
         """Agrega una pieza al tablero y actualiza la lista de piezas."""
         self.__pieces__.append(piece)
