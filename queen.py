@@ -1,4 +1,4 @@
-from pieces import Pieces, SymbolPiece
+from pieces import Piece, SymbolPiece
 
 class Queen(SymbolPiece):
     def __init__(self, color, x, y, white_symbol='♕', black_symbol='♛'):
@@ -11,5 +11,5 @@ class Queen(SymbolPiece):
             (-1, 0), (1, 0), (0, -1), (0, 1)
         ]
         for direction in directions:
-            Pieces.add_moves_in_direction(self, board, moves, direction)
+            Piece.add_moves_in_direction(self, board, moves, direction)
         return moves

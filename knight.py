@@ -1,4 +1,4 @@
-from pieces import SymbolPiece
+from pieces import Piece, SymbolPiece
 
 class Knight(SymbolPiece):
     def get_moves(self, board):
