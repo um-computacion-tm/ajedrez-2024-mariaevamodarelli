@@ -27,3 +27,4 @@
 21/09: modificando los test
 22/09: arregalndo los test
 23/09: arregalndo importacion de los archivos
+24/09: modificando la clase board y los test
