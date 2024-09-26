@@ -8,7 +8,6 @@ from pieces import Piece, SymbolPiece
 
 
 
-
 class Board:
     def __init__(self):
         self.__board__ = [[None for _ in range(8)] for _ in range(8)]
@@ -27,17 +26,22 @@ class Board:
 
     def is_check(self, color):
         """Verifica si el rey del color dado está en jaque."""
-      
-        king = None
-        for row in self.__board__:
-            for piece in row:
-                if piece is not None and piece.get_type() == 'king' and piece.get_color() == color:
-                    king = piece
-                    break
+        king = self.find_king(color)
         if not king:
             raise ValueError(f"No se encontró al rey del color {color} en el tablero.")
         
-      
+        return self.is_king_in_check(king, color)
+
+    def find_king(self, color):
+        """Encuentra al rey del color dado en el tablero."""
+        for row in self.__board__:
+            for piece in row:
+                if piece is not None and piece.get_type() == 'king' and piece.get_color() == color:
+                    return piece
+        return None
+
+    def is_king_in_check(self, king, color):
+        """Verifica si alguna pieza enemiga puede capturar al rey."""
         for row in self.__board__:
             for piece in row:
                 if piece is not None and piece.get_color() != color:
@@ -50,7 +54,6 @@ class Board:
         if not self.is_check(color):
             return False
 
-        
         return not self.can_escape_check(color)
 
     def can_escape_check(self, color):
