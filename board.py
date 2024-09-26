@@ -11,37 +11,37 @@ from pieces import Piece, SymbolPiece
 
 class Board:
     def __init__(self):
-        """Inicializa el tablero de ajedrez como una matriz 8x8 vacía."""
         self.__board__ = [[None for _ in range(8)] for _ in range(8)]
 
     def place_piece(self, piece, row, col):
         """Coloca una pieza en una posición específica del tablero."""
-        piece.move(row, col, self.__board__)  
-        self.__board__[row][col] = piece      
+        self.__board__[row][col] = piece
+        piece.move(row, col, self.__board__)
 
-    def move_piece(self, piece, dest_row, dest_col):
-        """Mueve una pieza a una nueva posición si el movimiento es válido."""
-        if piece.is_valid_move(dest_row, dest_col, self.__board__):
-            
-            self.__board__[piece.get_row()][piece.get_column()] = None
-            
-            self.__board__[dest_row][dest_col] = piece
-            
-            piece.move(dest_row, dest_col, self.__board__)
-        else:
-            raise ValueError(f"Movimiento inválido para {piece}")
+    def move_piece(self, piece, row, col):
+        """Mueve una pieza a una nueva posición si es válido."""
+        if not piece.is_valid_move(row, col, self.__board__):
+            raise ValueError(f"Movimiento inválido de {piece} a la posición {row}, {col}")
+        self.__board__[piece.row][piece.col] = None  
+        self.place_piece(piece, row, col)  
 
     def is_check(self, color):
         """Verifica si el rey del color dado está en jaque."""
-        king = self.find_king(color)
-        enemy_color = "WHITE" if color == "BLACK" else "BLACK"
+      
+        king = None
+        for row in self.__board__:
+            for piece in row:
+                if piece is not None and piece.get_type() == 'king' and piece.get_color() == color:
+                    king = piece
+                    break
+        if not king:
+            raise ValueError(f"No se encontró al rey del color {color} en el tablero.")
         
-        
-        for row in range(8):
-            for col in range(8):
-                piece = self.__board__[row][col]
-                if piece and piece.get_color() == enemy_color:
-                    if piece.is_valid_move(king.get_row(), king.get_column(), self.__board__):
+      
+        for row in self.__board__:
+            for piece in row:
+                if piece is not None and piece.get_color() != color:
+                    if (king.row, king.col) in piece.get_moves(self.__board__):
                         return True
         return False
 
@@ -51,46 +51,32 @@ class Board:
             return False
 
         
+        return not self.can_escape_check(color)
+
+    def can_escape_check(self, color):
+        """Verifica si una pieza del color dado puede hacer un movimiento para escapar del jaque."""
         for row in range(8):
             for col in range(8):
                 piece = self.__board__[row][col]
                 if piece and piece.get_color() == color:
-                    valid_moves = piece.get_moves(self.__board__)
-                    for move in valid_moves:
-                        temp_board = self.copy_board()
-                        temp_board.move_piece(piece, move[0], move[1])
-                        if not temp_board.is_check(color):
-                            return False
-        return True
+                    if self.can_piece_escape(piece, color):
+                        return True
+        return False
 
-    def find_king(self, color):
-        """Encuentra y devuelve el rey del color dado."""
-        for row in range(8):
-            for col in range(8):
-                piece = self.__board__[row][col]
-                if piece and piece.get_color() == color and isinstance(piece, SymbolPiece) and str(piece) in ["♔", "♚"]:
-                    return piece
-        raise ValueError(f"No se encontró el rey de color {color}")
+    def can_piece_escape(self, piece, color):
+        """Verifica si una pieza puede moverse a una posición donde el rey no esté en jaque."""
+        valid_moves = piece.get_moves(self.__board__)
+        for move in valid_moves:
+            temp_board = self.copy_board()
+            temp_board.move_piece(piece, move[0], move[1])
+            if not temp_board.is_check(color):
+                return True
+        return False
 
     def copy_board(self):
-        """Devuelve una copia del tablero actual para simulaciones."""
+        """Crea una copia del tablero para verificar futuros movimientos."""
         new_board = Board()
         for row in range(8):
             for col in range(8):
-                piece = self.__board__[row][col]
-                if piece:
-                    new_board.place_piece(piece, row, col)
+                new_board.__board__[row][col] = self.__board__[row][col]
         return new_board
-
-    def print_board(self):
-        """Imprime el estado actual del tablero."""
-        for row in range(8):
-            print([str(piece) if piece else '.' for piece in self.__board__])
-
-
-
-
-
-
-
-
