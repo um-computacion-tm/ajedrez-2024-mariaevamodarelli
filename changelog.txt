@@ -31,3 +31,4 @@
 25/09: arregalndo el code climate
 26/09: arregalndo los test
 27/09: refactorizando los test
+29/09: arregalndofallas de los test
