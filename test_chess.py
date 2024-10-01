@@ -8,9 +8,7 @@ from knight import Knight
 from pawn import Pawn
 from bishop import Bishop
 
-import unittest
-from board import Board
-from pieces import King, Rook
+
 
 class TestBoard(unittest.TestCase):
 
@@ -25,25 +23,34 @@ class TestBoard(unittest.TestCase):
         self.board.place_piece(self.white_rook, 7, 0)
         self.board.place_piece(self.black_rook, 0, 0)
 
-    def move_and_check(self, piece, dest_row, dest_col, check_function, *args):
-        """Helper function to move a piece and check a condition."""
+    def move_piece_and_assert(self, piece, dest_row, dest_col, assertion_func, expected_result, message):
+        """Helper to move a piece and assert a condition."""
         self.board.move_piece(piece, dest_row, dest_col)
-        check_function(*args)
+        assertion_func(expected_result, message)
 
-    def test_is_check(self):
-        """Prueba si el rey blanco está en jaque."""
-        self.move_and_check(self.white_rook, 0, 0, self.assertTrue, self.board.is_check("BLACK"))
+    def test_check_conditions(self):
+        """Test both check and checkmate conditions in one place."""
+        scenarios = [
+            (self.white_rook, 0, 0, self.assertTrue, self.board.is_check("BLACK"), "BLACK is in check"),
+            (self.white_rook, 0, 0, self.assertTrue, self.board.is_checkmate("BLACK"), "BLACK is in checkmate")
+        ]
 
-    def test_is_checkmate(self):
-        """Prueba si el rey blanco está en jaque mate."""
-        self.move_and_check(self.white_rook, 0, 0, self.assertTrue, self.board.is_checkmate("BLACK"))
+        for piece, row, col, assert_func, result, msg in scenarios:
+            with self.subTest(piece=piece, row=row, col=col, msg=msg):
+                self.move_piece_and_assert(piece, row, col, assert_func, result, msg)
 
-    def test_invalid_move(self):
-        """Prueba un movimiento inválido para una pieza."""
-        with self.assertRaises(ValueError):
-            self.board.move_piece(self.white_king, 8, 4)
+    def test_invalid_moves(self):
+        """Test invalid movements for pieces."""
+        scenarios = [
+            (self.white_king, 8, 4, ValueError, "Invalid move for white king out of board"),
+            (self.white_king, 9, 4, ValueError, "Move out of bounds")
+        ]
 
-    def test_move_out_of_bounds(self):
-        """Prueba que una pieza no se puede mover fuera del tablero."""
-        with self.assertRaises(ValueError):
-            self.board.move_piece(self.white_king, 9, 4)
+        for piece, row, col, error, msg in scenarios:
+            with self.subTest(piece=piece, row=row, col=col, msg=msg):
+                with self.assertRaises(error, msg=msg):
+                    self.board.move_piece(piece, row, col)
+
+
+if __name__ == "__main__":
+    unittest.main()
