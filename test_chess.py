@@ -11,20 +11,20 @@ from bishop import Bishop
 
 
 class TestBoard(unittest.TestCase):
-
+    
     def setUp(self):
         self.board = Board()
-        self.white_king = King("WHITE", 7, 4)
-        self.black_king = King("BLACK", 0, 4)
-        self.white_rook = Rook("WHITE", 7, 0)
-        self.black_rook = Rook("BLACK", 0, 0)
-        self.board.place_piece(self.white_king, 7, 4)
+        self.white_rook = SymbolPiece("WHITE", 0, 0, "♖", "♜")
+        self.black_king = SymbolPiece("BLACK", 0, 4, "♔", "♚")
+        self.white_king = SymbolPiece("WHITE", 7, 4, "♔", "♚")
+        
+        self.board.place_piece(self.white_rook, 0, 0)
         self.board.place_piece(self.black_king, 0, 4)
-        self.board.place_piece(self.white_rook, 7, 0)
-        self.board.place_piece(self.black_rook, 0, 0)
-
-    def move_piece_and_assert(self, piece, dest_row, dest_col, assertion_func, expected_result, message):
+        self.board.place_piece(self.white_king, 7, 4)
+    
+    def move_piece_and_assert(self, move_data, assertion_func, expected_result, message):
         """Helper to move a piece and assert a condition."""
+        piece, dest_row, dest_col = move_data
         self.board.move_piece(piece, dest_row, dest_col)
         assertion_func(expected_result, message)
 
@@ -37,7 +37,8 @@ class TestBoard(unittest.TestCase):
 
         for piece, row, col, assert_func, result, msg in scenarios:
             with self.subTest(piece=piece, row=row, col=col, msg=msg):
-                self.move_piece_and_assert(piece, row, col, assert_func, result, msg)
+                move_data = (piece, row, col)
+                self.move_piece_and_assert(move_data, assert_func, result, msg)
 
     def test_invalid_moves(self):
         """Test invalid movements for pieces."""
@@ -48,9 +49,10 @@ class TestBoard(unittest.TestCase):
 
         for piece, row, col, error, msg in scenarios:
             with self.subTest(piece=piece, row=row, col=col, msg=msg):
+                move_data = (piece, row, col)
                 with self.assertRaises(error, msg=msg):
-                    self.board.move_piece(piece, row, col)
+                    self.board.move_piece(*move_data)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

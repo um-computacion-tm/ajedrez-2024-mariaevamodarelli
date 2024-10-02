@@ -33,3 +33,4 @@
 27/09: refactorizando los test
 29/09: arregalndofallas de los test
 30/09: refactorizando el codigo 
+01/10: refactorizando el codigo
