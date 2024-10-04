@@ -10,6 +10,8 @@ from bishop import Bishop
 
 
 
+
+
 class TestBoard(unittest.TestCase):
 
     def setUp(self):
