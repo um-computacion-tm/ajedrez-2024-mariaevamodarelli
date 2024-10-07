@@ -35,3 +35,4 @@
 30/09: refactorizando el codigo 
 01/10: refactorizando el codigo
 02/10: arregalndo los test 
+05/10: refactorizando los test
