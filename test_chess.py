@@ -14,8 +14,8 @@ class TestBoard(unittest.TestCase):
 
     def setUp(self):
         self.board = Board()
-        self.white_rook = Rook("WHITE", 0, 0)
-        self.black_king = King("BLACK", 7, 4)
+        self.white_rook = Rook("WHITE", 0, 0, "♖", "♜")
+        self.black_king = King("BLACK", 7, 4, "♔", "♚")
         self.board.place_piece(self.white_rook, 0, 0)
         self.board.place_piece(self.black_king, 7, 4)
 

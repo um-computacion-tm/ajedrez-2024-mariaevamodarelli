@@ -37,3 +37,4 @@
 02/10: arregalndo los test 
 05/10: refactorizando los test
 07/10: refactorizando los test
+08/10: arreglando los test
