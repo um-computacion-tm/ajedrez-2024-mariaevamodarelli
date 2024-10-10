@@ -45,14 +45,24 @@ class Piece:
             r += d_row
             c += d_col
 
-    def add_potential_moves(self, board, moves, potential_moves):
-        for r, c in potential_moves:
-            if Piece.is_valid_position(r, c) and (board[r][c] is None or board[r][c].get_color() != self.__color__):
-                moves.append((r, c))
+    @staticmethod
+    def add_potential_moves(board, moves, potential_moves):
+        """
+        Agrega movimientos potenciales a la lista de movimientos válidos.
+        Se asegura de que los valores de potential_moves sean tuplas (fila, columna).
+        """
+        for move in potential_moves:
+            if isinstance(move, tuple) and len(move) == 2:
+                r, c = move
+                if Piece.is_valid_position(r, c) and (board[r][c] is None or board[r][c].get_color() != moves[0].get_color()):
+                    moves.append((r, c))
+            else:
+                raise ValueError(f"Movimiento inválido: {move} no es una tupla (fila, columna) válida.")
 
     
     def is_valid_position(row, col):
         return 0 <= row < 8 and 0 <= col < 8
+
 
 
 class SymbolPiece(Piece):
